@@ -1,0 +1,93 @@
+package com.Vehicle_Reservation.Vehicle_Reservation_System.service;
+
+import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.VehicleDto;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.VehiclePictures;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.ReservationRepository;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.VehicleRepository;
+import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+
+@Service
+@Transactional
+public class VehicleService {
+    @Autowired
+    private VehicleRepository vehicleRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+//    @GetMapping("/tutorials")
+//    public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
+//        List<Tutorial> tutorials = new ArrayList<Tutorial>();
+//
+//        if (title == null)
+//            tutorialRepository.findAll().forEach(tutorials::add);
+//        else
+//            tutorialRepository.findByTitleContaining(title).forEach(tutorials::add);
+//
+//        if (tutorials.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//
+//        return new ResponseEntity<>(tutorials, HttpStatus.OK);
+//    }
+//
+//
+//    public ResponseEntity<List<Vehicle>> getAllVehicles(String name){
+//        List<Vehicle> vehicles = new ArrayList<Vehicle>();
+//
+//        if (name == null)
+//            vehicles.addAll(vehicleRepository.findAll());
+//        else
+//            vehicleRepository.findVehiclesByServiceAreasIsContaining(name);
+//
+//        if (vehicles.isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//
+//        return new ResponseEntity<>(vehicles, HttpStatus.OK);
+//    }
+//
+
+    public void addVehicle(VehicleDto vehicleDto){
+        vehicleRepository.save(modelMapper.map(vehicleDto,Vehicle.class));
+    }
+
+    public VehicleDto getVehicleByVehicleNo(String vehicleNumber){
+        Vehicle vehicle = vehicleRepository.getVehicleByVehicleNumber(vehicleNumber);
+        return modelMapper.map(vehicle,VehicleDto.class);
+    }
+    public void  deleteVehicleByVehicleNo(String vehicleNumber){
+        vehicleRepository.removeVehicleByVehicleNumber(vehicleNumber);
+    }
+    public void updateVehicleDetails(String vehicleNumber, String insuranceNo, int days, int maxLength, int maxPassengers ) {
+        Vehicle vehicle = vehicleRepository.getVehicleByVehicleNumber(vehicleNumber);
+        vehicle.setInsuranceNo(insuranceNo);
+        vehicle.setMaxDays(days);
+        vehicle.setMaxLength(maxLength);
+        vehicle.setMaxPassengers(maxPassengers);
+    }
+
+    public List<VehiclePictures> getVehiclePicturesByVehicleNo(String vehicleNumber) {
+        Vehicle vehicle = vehicleRepository.getVehicleByVehicleNumber(vehicleNumber);
+        return vehicle.getVehiclePictures();
+    }
+
+    public List<Vehicle> getAllVehicles() {
+        return vehicleRepository.findAll();
+    }
+
+
+//    public List<ReservationDto> getAllReservation(String vehicleNumber) {
+//        return reservationRepository.getReservationsByVehicleNumber(vehicleNumber);
+//    }
+}
