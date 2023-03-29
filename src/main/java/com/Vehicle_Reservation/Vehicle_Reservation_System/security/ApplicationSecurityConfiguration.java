@@ -31,10 +31,10 @@ public class ApplicationSecurityConfiguration {
         return httpSecurity
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v2/open/**","/user/add").permitAll()
+                .requestMatchers("/api/v2/open/**","/user/add","/api/v1/**").permitAll()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/api/v1/**").authenticated()
-                .and()
+//                .authorizeHttpRequests().requestMatchers("/api/v1/**").authenticated()
+//                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
