@@ -35,10 +35,10 @@ public class DriverService {
         driverRepository.deleteById(driverId);
     }
 
-    public DriverDto getDriverByDriverId(Integer driverId){
-        Driver driver = driverRepository.getReferenceById(driverId);
-        return modelMapper.map(driver,DriverDto.class);
-    }
+//    public DriverDto getDriverByDriverId(Integer driverId){
+//        Driver driver = driverRepository.getReferenceById(driverId);
+//        return modelMapper.map(driver,DriverDto.class);
+//    }
 
     public void updateDriverDetails(String userName, String firstName, String lastName, String userName1, String password, String address, String telephone, String licenceNo, LocalDate dob, String email) {
 
@@ -61,4 +61,7 @@ public class DriverService {
 //        return modelMapper.map(driver.getVehicles(),new TypeToken<List<VehicleDto>>(){}.getType());
     }
 
+    public Driver getDriverByUserName(String userName) {
+        return driverRepository.getDriverByUserName(userName);
+    }
 }

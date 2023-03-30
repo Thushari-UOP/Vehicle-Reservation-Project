@@ -20,12 +20,14 @@ public class Driver {
     private int driverId;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String userName;
     private String password;
-    private String Address;
+    private String address;
     private String telephone;
     private String licenceNo;
     private LocalDate dob;
+    @Column(unique = true)
     private String email;
 
 

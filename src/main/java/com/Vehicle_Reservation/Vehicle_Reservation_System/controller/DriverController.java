@@ -1,6 +1,7 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.controller;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.DriverDto;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Driver;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.DriverService;
 import org.jetbrains.annotations.NotNull;
@@ -35,15 +36,31 @@ public class DriverController {
         return true;
     }
 
-    @GetMapping("/getDriverById/{driverId}")
-    public DriverDto getDriverByDriverId(@PathVariable Integer driverId){
-        return driverService.getDriverByDriverId(driverId);
+//    @GetMapping("/getDriverById/{driverId}")
+//    public DriverDto getDriverByDriverId(@PathVariable Integer driverId){
+//        return driverService.getDriverByDriverId(driverId);
+//    }
+
+    @GetMapping("/getDriver/{userName}")
+    public Driver getDriverByUserName(@PathVariable String userName){
+        return driverService.getDriverByUserName(userName);
     }
 
 
     @PutMapping("/update/{userName}")
     public boolean updateDriverDetails(@PathVariable String userName, @RequestBody @NotNull DriverDto driverDto){
-        driverService.updateDriverDetails(userName,driverDto.getFirstName(), driverDto.getLastName(), driverDto.getUserName(), driverDto.getPassword(), driverDto.getAddress(), driverDto.getTelephone(), driverDto.getLicenceNo(), driverDto.getDob(), driverDto.getEmail());
+        driverService.updateDriverDetails(
+                userName,
+                driverDto.getFirstName(),
+                driverDto.getLastName(),
+                driverDto.getUserName(),
+                driverDto.getPassword(),
+                driverDto.getAddress(),
+                driverDto.getTelephone(),
+                driverDto.getLicenceNo(),
+                driverDto.getDob(),
+                driverDto.getEmail()
+        );
         return true;
     }
 
