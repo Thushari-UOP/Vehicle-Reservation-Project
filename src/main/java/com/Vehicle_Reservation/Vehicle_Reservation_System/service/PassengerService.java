@@ -2,6 +2,7 @@ package com.Vehicle_Reservation.Vehicle_Reservation_System.service;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.PassengerDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Passenger;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.exceptions.ResourceNotFoundException;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.PassengerRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -33,7 +34,7 @@ public class PassengerService{
         passengerRepository.deleteById(passengerId);
     }
 
-    public Passenger getPassengerByUserName(String userName) {
+    public Passenger getPassengerByUserName(String userName){
         return passengerRepository.getPassengerByUserNameIgnoreCase(userName);
     }
 

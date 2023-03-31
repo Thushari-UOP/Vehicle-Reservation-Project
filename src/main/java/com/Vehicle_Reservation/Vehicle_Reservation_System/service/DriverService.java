@@ -1,6 +1,7 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.service;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.DriverDto;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.VehicleDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Driver;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.DriverRepository;
@@ -64,4 +65,10 @@ public class DriverService {
     public Driver getDriverByUserName(String userName) {
         return driverRepository.getDriverByUserName(userName);
     }
+
+//    public void addVehicleForDriver(String userName, Vehicle vehicle) {
+////        driverRepository.addVehicleForDriver(modelMapper.map(vehicleDto,Vehicle.class),userName);
+//        Driver driver = driverRepository.getDriverByUserName(userName);
+//        int driveId = driver.getDriverId();
+//    }
 }

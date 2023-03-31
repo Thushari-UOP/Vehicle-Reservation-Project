@@ -23,6 +23,12 @@ public class DriverController {
         return true;
     }
 
+//    @PostMapping("/{userName}/addVehicle")
+//    public boolean addVehicleForDriver( @PathVariable String userName, @RequestBody Vehicle vehicle){
+//        driverService.addVehicleForDriver(userName,vehicle);
+//        return true;
+//    }
+
     @GetMapping("/getAll")
     public List<DriverDto> getAllDrivers(){
         return driverService.getAllDrivers();

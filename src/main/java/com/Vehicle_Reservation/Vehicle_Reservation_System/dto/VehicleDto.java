@@ -15,4 +15,5 @@ public class VehicleDto {
     private int maxLength;
     private int maxPassengers;
     private VehicleType type;
+    private int fkDriverId;
 }

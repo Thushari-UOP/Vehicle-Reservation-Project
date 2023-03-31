@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/Passenger")
 public class PassengerController {
@@ -15,19 +15,19 @@ public class PassengerController {
     @Autowired
     private PassengerService passengerService;
 
-//    @PostMapping("/add")
-//    public boolean addPassenger(@RequestBody PassengerDto passengerDto){
-//        passengerService.addPassenger(passengerDto);
-//        return true;
-//    }
+    @PostMapping("/add")
+    public boolean addPassenger(@RequestBody PassengerDto passengerDto){
+        passengerService.addPassenger(passengerDto);
+        return true;
+    }
 
     @GetMapping("/getAll")
     public List<PassengerDto> getAllPassengers(){
         return passengerService.getAllPassengers();
     }
 
-    @GetMapping("/getPassengerUserName/{userName}")
-    public Passenger getPassengerByUserName(@PathVariable String  userName){
+    @GetMapping("/getPassenger/{userName}")
+    public Passenger getPassengerByUserName(@PathVariable String userName){
         return passengerService.getPassengerByUserName(userName);
     }
 
@@ -47,4 +47,5 @@ public class PassengerController {
         passengerService.updateProfile(useName,passengerDto.getName(),passengerDto.getUserName(),passengerDto.getPassword(),passengerDto.getTelephoneNo(),passengerDto.getEmail());
         return true;
     }
+
 }

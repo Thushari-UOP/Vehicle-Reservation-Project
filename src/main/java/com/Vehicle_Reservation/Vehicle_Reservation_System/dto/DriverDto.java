@@ -13,7 +13,7 @@ public class DriverDto {
     private String lastName;
     private String userName;
     private String password;
-    private String Address;
+    private String address;
     private String telephone;
     private String licenceNo;
     private LocalDate dob;

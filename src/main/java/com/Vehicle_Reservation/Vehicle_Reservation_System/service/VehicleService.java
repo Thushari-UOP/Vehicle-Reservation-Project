@@ -3,7 +3,6 @@ package com.Vehicle_Reservation.Vehicle_Reservation_System.service;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.VehicleDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.VehiclePictures;
-import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.ReservationRepository;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.VehicleRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -20,43 +19,7 @@ public class VehicleService {
     private VehicleRepository vehicleRepository;
 
     @Autowired
-    private ReservationRepository reservationRepository;
-
-    @Autowired
     private ModelMapper modelMapper;
-
-//    @GetMapping("/tutorials")
-//    public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
-//        List<Tutorial> tutorials = new ArrayList<Tutorial>();
-//
-//        if (title == null)
-//            tutorialRepository.findAll().forEach(tutorials::add);
-//        else
-//            tutorialRepository.findByTitleContaining(title).forEach(tutorials::add);
-//
-//        if (tutorials.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//
-//        return new ResponseEntity<>(tutorials, HttpStatus.OK);
-//    }
-//
-//
-//    public ResponseEntity<List<Vehicle>> getAllVehicles(String name){
-//        List<Vehicle> vehicles = new ArrayList<Vehicle>();
-//
-//        if (name == null)
-//            vehicles.addAll(vehicleRepository.findAll());
-//        else
-//            vehicleRepository.findVehiclesByServiceAreasIsContaining(name);
-//
-//        if (vehicles.isEmpty()){
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//
-//        return new ResponseEntity<>(vehicles, HttpStatus.OK);
-//    }
-//
 
     public void addVehicle(VehicleDto vehicleDto){
         vehicleRepository.save(modelMapper.map(vehicleDto,Vehicle.class));

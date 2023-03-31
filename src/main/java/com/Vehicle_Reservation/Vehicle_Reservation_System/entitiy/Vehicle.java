@@ -18,6 +18,7 @@ public class Vehicle {
     private int vehicleId;
     @Enumerated(EnumType.STRING)
     private VehicleType type;
+    @Column(unique = true)
     private String vehicleNumber;
     private String insuranceNo;
     private int maxDays;

@@ -50,17 +50,10 @@ public class VehicleController {
         return true;
     }
 
-
-
-
-
-
     @GetMapping("/getAllVehicles")
     public List<Vehicle> getALlVehicles(){
         return vehicleService.getAllVehicles();
     }
-
-
 
 
 //    @GetMapping("/AllReservationByVehicleNo/{vehicleNumber}")
