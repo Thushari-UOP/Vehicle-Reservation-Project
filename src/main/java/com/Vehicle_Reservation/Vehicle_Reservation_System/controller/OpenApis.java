@@ -62,40 +62,12 @@ public class OpenApis {
         String driver = "DRIVER";
         String passenger = "PASSENGER";
         if (driver.equalsIgnoreCase(type)) {
-            Driver d = driverService.getDriverByEmail(authDto.getEmail());
-            if (d == null) {
-                return ApiResponse.builder()
-                        .status(HttpStatus.NOT_FOUND)
-                        .message("Driver not found")
-                        .build();
-            }
-            if (passwordEncoder.encode(authDto.getPassword()).equals(d.getPassword())) {
-                String token =  jwtAuthService.generateToken(authDto.getEmail());
-                return ApiResponse.builder()
-                        .status(HttpStatus.OK)
-                        .message("Login Success")
-                        .data(Collections.singletonMap("token", token))
-                        .success(true)
-                        .build();
-            }
+            return driverService.handleDriverLogin(authDto);
         }
+
         if (passenger.equalsIgnoreCase(type)) {
-            Passenger d = passengerService.getPassengerByEmail(authDto.getEmail());
-            if (d == null) {
-                return ApiResponse.builder()
-                        .status(HttpStatus.NOT_FOUND)
-                        .message("Passenger not found")
-                        .build();
-            }
-            if (passwordEncoder.encode(authDto.getPassword()).equals(d.getPassword())) {
-                String token =  jwtAuthService.generateToken(authDto.getEmail());
-                return ApiResponse.builder()
-                        .status(HttpStatus.OK)
-                        .message("Login Success")
-                        .data(Collections.singletonMap("token", token))
-                        .success(true)
-                        .build();
-            }
+            return passengerService.handlePassengerLogin(authDto);
+
         }
         return null;
     }
