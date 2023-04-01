@@ -42,7 +42,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         }
 
-        if (userName != null && !token.equalsIgnoreCase("null") && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (userName != null && !token.equalsIgnoreCase("null") && !token.equalsIgnoreCase("undefined") && SecurityContextHolder.getContext().getAuthentication() == null) {
             userName = userName + "//@@//" + type;
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(userName);
             if (jwtAuthService.validateToken(token, userDetails)) {
