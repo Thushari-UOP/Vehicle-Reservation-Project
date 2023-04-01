@@ -78,7 +78,7 @@ public class PassengerService{
         }
 
         if (passwordEncoder.matches(authDto.getPassword(), passenger.getPassword())) {
-            String token =  jwtAuthService.generateToken(authDto.getEmail());
+            String token =  jwtAuthService.generateToken(authDto.getEmail(), "passenger");
             return ApiResponse.builder()
                     .status(HttpStatus.OK)
                     .message("Login Success")

@@ -1,8 +1,6 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.service;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,8 +15,9 @@ import java.util.function.Function;
 @Service
 public class JwtAuthService {
 
-    public String generateToken(String userName) {
+    public String generateToken(String userName, String type) {
         Map<String,Object> claims = new HashMap<>();
+        claims.put("type", type);
         return createToken(claims, userName);
     }
 
@@ -68,4 +67,13 @@ public class JwtAuthService {
     }
 
 
+    public String extractType(String token) {
+        JwtParser jwtParser = Jwts.parserBuilder()
+                .setSigningKey("MySecretKeyMySecretKeyMySecretKeyMySecretKeyMySecretKeyMySecretKey")
+                .build();
+        Jwt<Header, Claims> jwt = jwtParser.parse(token);
+        Claims claims = jwt.getBody();
+        return (String) claims.get("type");
+
+    }
 }
