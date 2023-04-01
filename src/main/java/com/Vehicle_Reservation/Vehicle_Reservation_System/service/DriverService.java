@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,8 +24,13 @@ public class DriverService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public void addDriver(DriverDto driverDto){
-        driverRepository.save(modelMapper.map(driverDto,Driver.class));
+        Driver d = modelMapper.map(driverDto,Driver.class);
+        d.setPassword(passwordEncoder.encode(driverDto.getPassword()));
+        driverRepository.save(d);
     }
 
     public List<DriverDto> getAllDrivers(){
@@ -64,6 +70,10 @@ public class DriverService {
 
     public Driver getDriverByUserName(String userName) {
         return driverRepository.getDriverByUserName(userName);
+    }
+
+    public Driver getDriverByEmail(String email) {
+        return driverRepository.getDriverByEmail(email);
     }
 
 //    public void addVehicleForDriver(String userName, Vehicle vehicle) {

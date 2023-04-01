@@ -3,6 +3,8 @@ package com.Vehicle_Reservation.Vehicle_Reservation_System.controller;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.DriverDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.PassengerDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.UserAuthDto;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Driver;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Passenger;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.resposes.ApiResponse;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.DriverService;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.JwtAuthService;
@@ -13,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -24,6 +27,9 @@ public class OpenApis {
     DriverService driverService;
     @Autowired
     PassengerService passengerService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
@@ -51,20 +57,47 @@ public class OpenApis {
         return true;
     }
 
-    @PostMapping("/login")
-    public ApiResponse Login(@RequestBody UserAuthDto authDto){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authDto.getEmail(),authDto.getPassword()));
-                if(authentication.isAuthenticated()){
-                    String token =  jwtAuthService.generateToken(authDto.getEmail());
-                    return ApiResponse.builder()
-                            .status(HttpStatus.OK)
-                            .message("Login Success")
-                            .data(Collections.singletonMap("token", token))
-                            .success(true)
-                            .build();
-                }else {
-                    throw new UsernameNotFoundException("User name of Password is wrong");
-                }
+    @PostMapping("{type}/login")
+    public ApiResponse Login(@RequestBody UserAuthDto authDto, @PathVariable String type){
+        String driver = "DRIVER";
+        String passenger = "PASSENGER";
+        if (driver.equalsIgnoreCase(type)) {
+            Driver d = driverService.getDriverByEmail(authDto.getEmail());
+            if (d == null) {
+                return ApiResponse.builder()
+                        .status(HttpStatus.NOT_FOUND)
+                        .message("Driver not found")
+                        .build();
+            }
+            if (passwordEncoder.encode(authDto.getPassword()).equals(d.getPassword())) {
+                String token =  jwtAuthService.generateToken(authDto.getEmail());
+                return ApiResponse.builder()
+                        .status(HttpStatus.OK)
+                        .message("Login Success")
+                        .data(Collections.singletonMap("token", token))
+                        .success(true)
+                        .build();
+            }
+        }
+        if (passenger.equalsIgnoreCase(type)) {
+            Passenger d = passengerService.getPassengerByEmail(authDto.getEmail());
+            if (d == null) {
+                return ApiResponse.builder()
+                        .status(HttpStatus.NOT_FOUND)
+                        .message("Passenger not found")
+                        .build();
+            }
+            if (passwordEncoder.encode(authDto.getPassword()).equals(d.getPassword())) {
+                String token =  jwtAuthService.generateToken(authDto.getEmail());
+                return ApiResponse.builder()
+                        .status(HttpStatus.OK)
+                        .message("Login Success")
+                        .data(Collections.singletonMap("token", token))
+                        .success(true)
+                        .build();
+            }
+        }
+        return null;
     }
 
 

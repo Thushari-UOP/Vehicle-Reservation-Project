@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,9 +21,14 @@ public class PassengerService{
 
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     public void addPassenger(PassengerDto passengerDto){
-        passengerRepository.save(modelMapper.map(passengerDto,Passenger.class));
+        Passenger p = modelMapper.map(passengerDto,Passenger.class);
+        p.setPassword(passwordEncoder.encode(passengerDto.getPassword()));
+        passengerRepository.save(p);
     }
 
     public List<PassengerDto> getAllPassengers(){
@@ -36,6 +42,10 @@ public class PassengerService{
 
     public Passenger getPassengerByUserName(String userName){
         return passengerRepository.getPassengerByUserNameIgnoreCase(userName);
+    }
+
+    public Passenger getPassengerByEmail(String email){
+        return passengerRepository.getPassengerByEmail(email);
     }
 
 //    public List<Reservation> getReservationsByUserName(String userName) {
