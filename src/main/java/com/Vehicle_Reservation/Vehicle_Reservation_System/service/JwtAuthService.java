@@ -15,9 +15,10 @@ import java.util.function.Function;
 @Service
 public class JwtAuthService {
 
-    public String generateToken(String userName, String type) {
+    public String generateToken(String userName, String type, Object o) {
         Map<String,Object> claims = new HashMap<>();
         claims.put("type", type);
+        claims.put("user", o);
         return createToken(claims, userName);
     }
 

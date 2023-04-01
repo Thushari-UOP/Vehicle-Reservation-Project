@@ -98,7 +98,7 @@ public class DriverService {
                     .build();
         }
         if (passwordEncoder.matches(authDto.getPassword(), driver.getPassword())) {
-            String token =  jwtAuthService.generateToken(authDto.getEmail(),"driver");
+            String token =  jwtAuthService.generateToken(authDto.getEmail(),"driver", driver);
             return ApiResponse.builder()
                     .status(HttpStatus.OK)
                     .message("Login Success")
