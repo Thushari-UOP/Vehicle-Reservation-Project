@@ -8,6 +8,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle,Integer> {
 
     Vehicle getVehicleByVehicleNumber(String vehicleNumber);
 
-    void removeVehicleByVehicleNumber(String vehicleNumber);
+    void removeVehicleByVehicleId(int vehicleId);
 
+    Vehicle getVehicleByVehicleId(int vehicleId);
 }

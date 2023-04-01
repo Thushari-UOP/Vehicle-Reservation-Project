@@ -15,7 +15,7 @@ public class VehiclePictures {
     private int pictureId;
     private String pictureUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_vehicle_id")
     @JsonIgnore
     private Vehicle vehicle;

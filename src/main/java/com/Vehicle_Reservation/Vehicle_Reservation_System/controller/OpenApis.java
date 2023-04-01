@@ -25,15 +25,15 @@ public class OpenApis {
     @Autowired
     private JwtAuthService jwtAuthService;
 
-//    @GetMapping("/Home")
-//    public String demoOpenApi(){
-//        return "Open";
-//    }
-//
-//    @PostMapping("/passengerLogin")
-//    public String forPassenger(){
-//        return "for passenger";
-//    }
+    @GetMapping("/Home")
+    public String demoOpenApi(){
+        return "Open";
+    }
+
+    @PostMapping("/passengerLogin")
+    public String forPassenger(){
+        return "for passenger";
+    }
 
     @PostMapping("/addDriver")
     public boolean addDriver(@RequestBody DriverDto driverDto){
@@ -51,7 +51,7 @@ public class OpenApis {
     public String Login(@RequestBody UserAuthDto authDto){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authDto.getUserName(),authDto.getPassword()));
                 if(authentication.isAuthenticated()){
-                    return jwtAuthService.generateToken(authDto.getPassword());
+                    return jwtAuthService.generateToken(authDto.getUserName());
                 }else {
                     throw new UsernameNotFoundException("User name of Password is wrong");
                 }

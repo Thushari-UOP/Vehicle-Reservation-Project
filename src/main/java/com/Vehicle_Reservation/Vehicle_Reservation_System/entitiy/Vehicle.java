@@ -18,8 +18,9 @@ public class Vehicle {
     private int vehicleId;
     @Enumerated(EnumType.STRING)
     private VehicleType type;
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String vehicleNumber;
+    @Column(unique = true,nullable = false)
     private String insuranceNo;
     private int maxDays;
     private int maxLength;
@@ -27,7 +28,7 @@ public class Vehicle {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_driver_id")
+    @JoinColumn(name = "fk_driver_id",nullable = false)
     @JsonIgnore
     private Driver driver;
 
@@ -45,18 +46,18 @@ public class Vehicle {
     @JoinTable(name = "service",joinColumns = @JoinColumn(name = "vehicle_id"),inverseJoinColumns = @JoinColumn(name = "service_area_id"))
     private List<ServiceArea> serviceAreas;
 
-//    public void addServiceArea(ServiceArea serviceArea){
-//        this.serviceAreas.add(serviceArea);
-//        serviceArea.getVehicles().add(this);
-//    }
-//
-//    public void removeServiceArea(int areaId){
-//        ServiceArea serviceArea = this.serviceAreas.stream().filter(t -> t.getServiceAreaId() == areaId).findFirst().orElse(null);
-//        if (serviceArea != null){
-//            this.serviceAreas.remove(serviceArea);
-//            serviceArea.getVehicles().remove(this);
-//        }
-//    }
+    public void addServiceArea(ServiceArea serviceArea){
+        this.serviceAreas.add(serviceArea);
+        serviceArea.getVehicles().add(this);
+    }
+
+    public void removeServiceArea(int areaId){
+        ServiceArea serviceArea = this.serviceAreas.stream().filter(t -> t.getServiceAreaId() == areaId).findFirst().orElse(null);
+        if (serviceArea != null){
+            this.serviceAreas.remove(serviceArea);
+            serviceArea.getVehicles().remove(this);
+        }
+    }
 
 
 

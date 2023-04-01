@@ -29,8 +29,8 @@ public class VehicleService {
         Vehicle vehicle = vehicleRepository.getVehicleByVehicleNumber(vehicleNumber);
         return modelMapper.map(vehicle,VehicleDto.class);
     }
-    public void  deleteVehicleByVehicleNo(String vehicleNumber){
-        vehicleRepository.removeVehicleByVehicleNumber(vehicleNumber);
+    public void  deleteVehicleByVehicleId(int vehicleId){
+        vehicleRepository.removeVehicleByVehicleId(vehicleId);
     }
     public void updateVehicleDetails(String vehicleNumber, String insuranceNo, int days, int maxLength, int maxPassengers ) {
         Vehicle vehicle = vehicleRepository.getVehicleByVehicleNumber(vehicleNumber);
@@ -47,6 +47,11 @@ public class VehicleService {
 
     public List<Vehicle> getAllVehicles() {
         return vehicleRepository.findAll();
+    }
+
+    public Vehicle getVehicleById(int vehicleId) {
+        Vehicle vehicle = vehicleRepository.getVehicleByVehicleId(vehicleId);
+        return vehicle;
     }
 
 

@@ -27,14 +27,20 @@ public class VehicleController {
         return vehicleService.getVehicleByVehicleNo(vehicleNumber);
     }
 
+    @GetMapping("/getVehicleById/{vehicleId}")
+    public Vehicle getVehicleById(@PathVariable int vehicleId){
+        return vehicleService.getVehicleById(vehicleId);
+    }
+
+
     @GetMapping("/{vehicleNumber}/pictures")
     public List<VehiclePictures> getVehiclePicturesByVehicleNo(@PathVariable String vehicleNumber){
         return vehicleService.getVehiclePicturesByVehicleNo(vehicleNumber);
     }
 
-    @DeleteMapping("/deleteVehicleByVehicleNo/{vehicleNumber}")
-    public boolean deleteVehicleByVehicleNo(@PathVariable String vehicleNumber){
-        vehicleService.deleteVehicleByVehicleNo(vehicleNumber);
+    @DeleteMapping("/deleteVehicleById/{vehicleId}")
+    public boolean deleteVehicleByVehicleId(@PathVariable int vehicleId){
+        vehicleService.deleteVehicleByVehicleId(vehicleId);
         return true;
     }
 
