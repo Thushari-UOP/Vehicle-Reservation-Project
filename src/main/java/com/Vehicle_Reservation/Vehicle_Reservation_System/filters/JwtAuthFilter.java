@@ -29,6 +29,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String authorizationHeader = request.getHeader("Authorization");
         String token = null;
         String userName = null;
+        String type = null;
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             token = authorizationHeader.substring(7);
@@ -37,10 +38,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                  return;
             }
             userName = jwtAuthService.extractUserName(token);
+            type = jwtAuthService.extractType(token);
 
         }
 
         if (userName != null && !token.equalsIgnoreCase("null") && SecurityContextHolder.getContext().getAuthentication() == null) {
+            userName = userName + "//@@//" + type;
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(userName);
             if (jwtAuthService.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

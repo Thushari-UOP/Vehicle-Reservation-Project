@@ -2,6 +2,7 @@ package com.Vehicle_Reservation.Vehicle_Reservation_System.security;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Users;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import java.util.stream.Stream;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserDetailsImplementation implements UserDetails {
 
     private String email;
