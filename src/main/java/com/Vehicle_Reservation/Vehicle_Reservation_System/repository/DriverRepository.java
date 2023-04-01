@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface DriverRepository extends JpaRepository<Driver,Integer>{
     Driver getDriverByUserName(String userName);
 
+    Driver getDriverByEmail(String email);
+
     //    @Query(value = "select driver.vehicle from Driver where ")
 //    List<VehicleDto> findVehiclesByDriverUserName(String userName);
 

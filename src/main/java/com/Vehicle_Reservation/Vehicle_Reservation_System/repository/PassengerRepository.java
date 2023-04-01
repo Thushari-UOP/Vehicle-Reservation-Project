@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PassengerRepository extends JpaRepository<Passenger,Integer> {
     Passenger getPassengerByUserNameIgnoreCase(String userName);
 
+    Passenger getPassengerByEmail(String email);
 }

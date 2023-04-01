@@ -16,15 +16,15 @@ public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int passengerId;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String name;
-    @Column(nullable = false,unique = true)
+    @Column(nullable = true,unique = true)
     private String userName;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String telephoneNo;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String email;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "passenger")

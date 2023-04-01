@@ -16,12 +16,12 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 public class UserDetailsImplementation implements UserDetails {
 
-    private String name;
+    private String email;
     private String password;
     private List<GrantedAuthority> authorities;
 
     public UserDetailsImplementation(Users user){
-        name  = user.getName();
+        email  = user.getEmail();
         password = user.getPassword();
         authorities = Stream.of(user.getRole()).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
@@ -38,7 +38,7 @@ public class UserDetailsImplementation implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return email;
     }
 
     @Override
