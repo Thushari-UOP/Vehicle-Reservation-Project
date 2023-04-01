@@ -83,11 +83,11 @@ public class DriverController {
 
 
 //    @PreAuthorize("hasRole('ADMIN')")
-//    @GetMapping("/demoAdmin")
-//    public String demoAdmin(){
-//        return "HelloAdmin";
-//    }
-//
+    @GetMapping("/demoAdmin")
+    public String demoAdmin(){
+        return "HelloAdmin";
+    }
+
 //
 //    @PreAuthorize("hasAnyRole('ADMIN','USER')")
 //    @PreAuthorize("hasRole('USER')")

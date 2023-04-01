@@ -35,4 +35,8 @@ public class ReservatinService {
         Reservation reservation = reservationRepository.getReferenceById(reservationId);
         return modelMapper.map(reservation,ReservationDto.class);
     }
+
+    public void reservationAdd(Reservation reservation) {
+        reservationRepository.save(reservation);
+    }
 }

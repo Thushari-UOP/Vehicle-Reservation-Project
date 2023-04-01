@@ -1,6 +1,7 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.controller;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.ReservationDto;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Reservation;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.ReservatinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,12 @@ public class ReservationController{
     @PostMapping("/add")
     public void addReservation(@RequestBody ReservationDto reservationDto){
         reservatinService.addReservation(reservationDto);
+    }
+
+    @PostMapping("/create")
+    public boolean reservation(@RequestBody Reservation reservation){
+        reservatinService.reservationAdd(reservation);
+        return true;
     }
 
     @GetMapping("/getAll")
