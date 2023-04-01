@@ -102,7 +102,7 @@ public class DriverService {
             return ApiResponse.builder()
                     .status(HttpStatus.OK)
                     .message("Login Success")
-                    .data(Collections.singletonMap("token", token))
+                    .response(Collections.singletonMap("token", token))
                     .success(true)
                     .build();
         }

@@ -22,6 +22,7 @@ import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/v2/open")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OpenApis {
     @Autowired
     DriverService driverService;

@@ -11,5 +11,5 @@ public class ApiResponse {
     private String message;
     private boolean success;
     private Object error;
-    private Object data;
+    private Object response;
 }
