@@ -15,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -26,23 +27,32 @@ public class ApplicationSecurityConfiguration {
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+
         return httpSecurity
-                .csrf().disable()
+                .csrf()
+                .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v2/open/**","/user/add").permitAll()
-                .and()
-                .authorizeHttpRequests().requestMatchers("/api/v1/**").authenticated()
+//                .requestMatchers("/api/v2/open/**","/user/add")
+//                .permitAll()
+//                .and()
+//                .authenticationProvider(authenticationProvider())
+//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+//                .authorizeHttpRequests()
+                .anyRequest()
+                .permitAll().and()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .and().build();
     }
-
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint(){
+        return new CustomAccessDeniedEntry();
+    }
 
     @Bean
     public UserDetailsService userDetailsService(){

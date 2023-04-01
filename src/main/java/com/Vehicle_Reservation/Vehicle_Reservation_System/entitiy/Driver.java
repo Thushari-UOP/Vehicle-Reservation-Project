@@ -18,22 +18,22 @@ public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int driverId;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String firstName;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String lastName;
-    @Column(unique = true,nullable = false)
+    @Column(unique = true,nullable = true)
     private String userName;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password;
     private String address;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String telephone;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String licenceNo;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate dob;
-    @Column(unique = true,nullable = false)
+    @Column(unique = true,nullable = true)
     private String email;
 
 
