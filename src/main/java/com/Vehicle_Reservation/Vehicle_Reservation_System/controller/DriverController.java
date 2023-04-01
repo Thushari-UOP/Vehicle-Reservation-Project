@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/Driver")
+@RequestMapping("/api/v1/driver")
 public class DriverController {
     @Autowired
     private DriverService driverService;
@@ -29,7 +29,7 @@ public class DriverController {
 //        return true;
 //    }
 
-    @GetMapping("/getAll")
+    @GetMapping("/get-all")
     public List<DriverDto> getAllDrivers(){
         return driverService.getAllDrivers();
     }

@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     //In here give the User from database for user Details
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Users> user = userRepository.findByName(username);
+        Optional<Users> user = userRepository.findByEmail(username);
         return user.map(UserDetailsImplementation::new)
                 .orElseThrow(()-> new UsernameNotFoundException("UserNotFound"));
     }
