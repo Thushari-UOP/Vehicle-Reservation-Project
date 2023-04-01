@@ -3,9 +3,11 @@ package com.Vehicle_Reservation.Vehicle_Reservation_System.controller;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.DriverDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.PassengerDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.UserAuthDto;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.UserDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.DriverService;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.JwtAuthService;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.PassengerService;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,7 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v2/open")
+@RequestMapping("api/v2/open")
 public class OpenApis {
     @Autowired
     DriverService driverService;
@@ -25,7 +27,7 @@ public class OpenApis {
     @Autowired
     private JwtAuthService jwtAuthService;
 
-    @GetMapping("/Home")
+    @GetMapping("/home")
     public String demoOpenApi(){
         return "Open";
     }
@@ -56,6 +58,4 @@ public class OpenApis {
                     throw new UsernameNotFoundException("User name of Password is wrong");
                 }
     }
-
-
 }

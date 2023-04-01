@@ -30,17 +30,19 @@ public class ApplicationSecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/v2/open/**","/user/add").permitAll()
-                .and()
-                .authorizeHttpRequests().requestMatchers("/api/v1/**").authenticated()
-                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                .authorizeHttpRequests()
+                .requestMatchers("/api/v2/open/**","/user/add")
+                .permitAll()
+                .and()
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .authorizeHttpRequests()
+                .anyRequest()
+                .authenticated()
+                .and().build();
     }
 
 
