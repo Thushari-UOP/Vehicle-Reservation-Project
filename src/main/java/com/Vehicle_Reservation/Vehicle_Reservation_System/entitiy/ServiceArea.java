@@ -12,7 +12,6 @@ import java.util.List;
 @Setter
 public class ServiceArea {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int serviceAreaId;

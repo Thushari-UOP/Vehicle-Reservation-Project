@@ -1,18 +1,18 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.controller;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.VehicleDto;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.VehicleServiceAreasDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.VehiclePictures;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.resposes.ApiResponse;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.VehicleService;
-import jakarta.servlet.http.HttpServletRequest;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -84,6 +84,18 @@ public class VehicleController {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    @PostMapping("/add-service-areas")
+    public ResponseEntity<ApiResponse> addServiceAreas(@RequestBody VehicleServiceAreasDto vehicleServiceAreasDto) {
+        return ResponseEntity.status(201).body(
+                ApiResponse.builder()
+                        .status(HttpStatus.CREATED)
+                        .message("Success")
+                        .response(vehicleService.addServiceAreas(vehicleServiceAreasDto))
+                        .build()
+        );
+
     }
 
 
