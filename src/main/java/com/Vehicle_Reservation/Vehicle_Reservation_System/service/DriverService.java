@@ -76,7 +76,7 @@ public class DriverService {
     }
 
     public List<Vehicle> getVehiclesByUserName(String userName) {
-        Driver driver = driverRepository.getDriverByUserName(userName);
+        Driver driver = driverRepository.getDriverByEmail(userName);
         return driver.getVehicles();
 //        return modelMapper.map(driver.getVehicles(),new TypeToken<List<VehicleDto>>(){}.getType());
     }
