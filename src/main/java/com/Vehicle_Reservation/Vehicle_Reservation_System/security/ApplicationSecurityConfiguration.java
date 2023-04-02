@@ -43,8 +43,8 @@ public class ApplicationSecurityConfiguration {
                 .authorizeHttpRequests()
                 .anyRequest()
                 .authenticated().and()
-                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
-                .and()
+//                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
+//                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().build();

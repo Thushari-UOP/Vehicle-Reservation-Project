@@ -20,7 +20,7 @@ public class Passenger {
     private String name;
     @Column(nullable = true,unique = true)
     private String userName;
-    @Column(nullable = true)
+    @Column(nullable = true,columnDefinition = "varchar(255)")
     private String password;
     @Column(nullable = true)
     private String telephoneNo;

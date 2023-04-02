@@ -24,7 +24,7 @@ public class Driver {
     private String lastName;
     @Column(unique = true,nullable = true)
     private String userName;
-    @Column(nullable = true)
+    @Column(nullable = true,columnDefinition = "varchar(255)")
     private String password;
     private String address;
     @Column(nullable = true)
