@@ -5,15 +5,18 @@ import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.VehiclePictures;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.VehicleRepository;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
 @Service
 @Transactional
+@Slf4j
 public class VehicleService {
     @Autowired
     private VehicleRepository vehicleRepository;
@@ -52,6 +55,11 @@ public class VehicleService {
     public Vehicle getVehicleById(int vehicleId) {
         Vehicle vehicle = vehicleRepository.getVehicleByVehicleId(vehicleId);
         return vehicle;
+    }
+
+    public List<Vehicle> search(String type, Integer passengers, LocalDate date, String town, String dates) {
+        log.info(type, passengers, date, town);
+        return vehicleRepository.search(type, passengers, town, dates);
     }
 
 

@@ -13,6 +13,7 @@ import java.util.List;
 public class ServiceArea {
     @Id
     @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int serviceAreaId;
     @Column(unique = true, nullable = false)
     private String name;

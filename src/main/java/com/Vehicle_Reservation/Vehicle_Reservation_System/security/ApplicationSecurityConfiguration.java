@@ -49,10 +49,10 @@ public class ApplicationSecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().build();
     }
-    @Bean
-    public AuthenticationEntryPoint authenticationEntryPoint(){
-        return new CustomAccessDeniedEntry();
-    }
+//    @Bean
+//    public AuthenticationEntryPoint authenticationEntryPoint(){
+//        return new CustomAccessDeniedEntry();
+//    }
 
     @Bean
     public UserDetailsService userDetailsService(){
