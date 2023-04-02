@@ -1,6 +1,7 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.controller;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.ServiceAreaDto;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.ServiceArea;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.ServiceAreaServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class ServiceAreaController {
     public boolean addArea(@RequestBody ServiceAreaDto serviceAreaDto){
         serviceAreaServices.addArea(serviceAreaDto);
         return true;
+    }
+
+    @GetMapping("/getAll")
+    public List<ServiceArea> getAllAreas(){
+       return serviceAreaServices.getAllAreas();
     }
 
     @GetMapping("/{name}/vehicles")

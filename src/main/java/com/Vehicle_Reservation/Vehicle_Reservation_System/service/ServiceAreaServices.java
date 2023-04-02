@@ -28,4 +28,8 @@ public class ServiceAreaServices {
         ServiceArea serviceArea = serviceAreaRepository.getServiceAreaByNameIgnoreCase(name);
         return serviceArea.getVehicles();
     }
+
+    public List<ServiceArea> getAllAreas() {
+        return serviceAreaRepository.findAll();
+    }
 }
