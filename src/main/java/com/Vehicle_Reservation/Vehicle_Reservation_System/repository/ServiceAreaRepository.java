@@ -9,6 +9,8 @@ public interface ServiceAreaRepository extends JpaRepository<ServiceArea,Integer
 
    ServiceArea getServiceAreaByNameIgnoreCase(String name);
 
+   ServiceArea findByServiceAreaId(int i);
+
 //  @Query(value = "SELECT sa.vehicles FROM ServiceArea sa where sa.areaId=?1");
 //    List<Vehicle> getVehiclesByAreaId(int areaId);
 
