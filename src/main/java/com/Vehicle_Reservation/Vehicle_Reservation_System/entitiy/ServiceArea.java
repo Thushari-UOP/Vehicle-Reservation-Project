@@ -14,7 +14,6 @@ public class ServiceArea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int serviceAreaId;
     @Column(unique = true, nullable = false)
     private String name;

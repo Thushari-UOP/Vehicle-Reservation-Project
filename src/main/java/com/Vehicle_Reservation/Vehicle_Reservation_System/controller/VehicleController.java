@@ -86,7 +86,6 @@ public class VehicleController {
         }
     }
 
-
 //    @GetMapping("/AllReservationByVehicleNo/{vehicleNumber}")
 //    public List<ReservationDto> getAllReservation(@PathVariable String vehicleNumber){
 //        return vehicleService.getAllReservation(vehicleNumber);

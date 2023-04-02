@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
-
 @Service
 @Transactional
 @Slf4j
@@ -23,7 +22,6 @@ public class VehicleService {
 
     @Autowired
     private ModelMapper modelMapper;
-
     public void addVehicle(VehicleDto vehicleDto){
         vehicleRepository.save(modelMapper.map(vehicleDto,Vehicle.class));
     }
@@ -61,7 +59,6 @@ public class VehicleService {
         log.info(type, passengers, date, town);
         return vehicleRepository.search(type, passengers, town, dates);
     }
-
 
 //    public List<ReservationDto> getAllReservation(String vehicleNumber) {
 //        return reservationRepository.getReservationsByVehicleNumber(vehicleNumber);
