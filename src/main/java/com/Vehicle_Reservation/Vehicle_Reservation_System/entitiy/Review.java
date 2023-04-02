@@ -10,6 +10,7 @@ import lombok.*;
 @Setter
 public class Review {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reviewId;
     private int stars;
     private float ratings;
