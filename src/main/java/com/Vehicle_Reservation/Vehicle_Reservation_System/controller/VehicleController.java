@@ -22,7 +22,7 @@ public class VehicleController {
     @Autowired
     private VehicleService vehicleService;
 
-    @PostMapping("/addVehicle")
+    @PostMapping("/add-vehicle")
     public boolean addVehicle(@RequestBody VehicleDto vehicleDto) {
         vehicleService.addVehicle(vehicleDto);
         return true;
@@ -50,9 +50,9 @@ public class VehicleController {
         return true;
     }
 
-    @PutMapping("/update/{vehicleNumber}")
-    public boolean updateVehicleDetails(@PathVariable String vehicleNumber, @RequestBody VehicleDto vehicleDto) {
-        vehicleService.updateVehicleDetails(vehicleNumber, vehicleDto
+    @PutMapping("/update/{vehicleId}")
+    public boolean updateVehicleDetails(@PathVariable int vehicleId, @RequestBody VehicleDto vehicleDto) {
+        vehicleService.updateVehicleDetails(vehicleId, vehicleDto
                 .getInsuranceNo(), vehicleDto
                 .getMaxDays(), vehicleDto
                 .getMaxLength(), vehicleDto

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -40,8 +39,8 @@ public class VehicleService {
         vehicleRepository.removeVehicleByVehicleId(vehicleId);
     }
 
-    public void updateVehicleDetails(String vehicleNumber, String insuranceNo, int days, int maxLength, int maxPassengers) {
-        Vehicle vehicle = vehicleRepository.getVehicleByVehicleNumber(vehicleNumber);
+    public void updateVehicleDetails(int vehicleId, String insuranceNo, int days, int maxLength, int maxPassengers) {
+        Vehicle vehicle = vehicleRepository.getVehicleByVehicleId(vehicleId);
         vehicle.setInsuranceNo(insuranceNo);
         vehicle.setMaxDays(days);
         vehicle.setMaxLength(maxLength);
