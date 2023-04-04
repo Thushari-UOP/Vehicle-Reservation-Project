@@ -6,7 +6,6 @@ import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.VehiclePictures;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.resposes.ApiResponse;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.VehicleService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,13 +51,13 @@ public class VehicleController {
 
     @PutMapping("/update/{vehicleId}")
     public boolean updateVehicleDetails(@PathVariable int vehicleId, @RequestBody VehicleDto vehicleDto) {
-        vehicleService.updateVehicleDetails(vehicleId, vehicleDto
-                .getInsuranceNo(), vehicleDto
-                .getMaxDays(), vehicleDto
-                .getMaxLength(), vehicleDto
-                .getMaxPassengers()
+        vehicleService.updateVehicleDetails(
+                vehicleId,
+                vehicleDto.getInsuranceNo(),
+                vehicleDto.getMaxDays(),
+                vehicleDto.getMaxLength(),
+                vehicleDto.getMaxPassengers()
         );
-        //         .orElseThrow(() -> new ResourceNotFoundException("Not found Vehicle with Number = " + vehicleNo));
         return true;
     }
 
