@@ -27,7 +27,8 @@ public class VehicleService {
     @Autowired
     private ModelMapper modelMapper;
     public void addVehicle(VehicleDto vehicleDto){
-        vehicleRepository.save(modelMapper.map(vehicleDto,Vehicle.class));
+        Vehicle vehicle = vehicleRepository.save(modelMapper.map(vehicleDto,Vehicle.class));
+        addServiceAreas((long) vehicle.getVehicleId(),vehicleDto.getServiceAreas());
     }
 
     public VehicleDto getVehicleByVehicleNo(String vehicleNumber) {
@@ -69,16 +70,14 @@ public class VehicleService {
     @Autowired
     ServiceAreaRepository serviceAreaRepository;
 
-    public Vehicle addServiceAreas(VehicleServiceAreasDto vehicleServiceAreasDto) {
-        Vehicle vehicle = vehicleRepository.getVehicleByVehicleId(vehicleServiceAreasDto.getVehicleId());
+    public Vehicle addServiceAreas(Long id, List<Integer> integerList) {
+        Vehicle vehicle = vehicleRepository.getVehicleByVehicleId(Math.toIntExact(id));
         vehicle.setServiceAreas(new ArrayList<>());
         vehicleRepository.save(vehicle);
-        for (Integer sId : vehicleServiceAreasDto.getServiceAreas()
-        ) {
+        for (Integer sId : integerList) {
             ServiceArea serviceArea = serviceAreaRepository.findByServiceAreaId(sId);
             vehicle.addServiceArea(serviceArea);
         }
-
         return vehicleRepository.save(vehicle);
     }
 

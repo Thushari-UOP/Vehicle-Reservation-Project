@@ -85,17 +85,17 @@ public class VehicleController {
         }
     }
 
-    @PostMapping("/add-service-areas")
-    public ResponseEntity<ApiResponse> addServiceAreas(@RequestBody VehicleServiceAreasDto vehicleServiceAreasDto) {
-        return ResponseEntity.status(201).body(
-                ApiResponse.builder()
-                        .status(HttpStatus.CREATED)
-                        .message("Success")
-                        .response(vehicleService.addServiceAreas(vehicleServiceAreasDto))
-                        .build()
-        );
-
-    }
+//    @PostMapping("/add-service-areas")
+//    public ResponseEntity<ApiResponse> addServiceAreas(@RequestBody VehicleServiceAreasDto vehicleServiceAreasDto) {
+//        return ResponseEntity.status(201).body(
+//                ApiResponse.builder()
+//                        .status(HttpStatus.CREATED)
+//                        .message("Success")
+//                        .response(vehicleService.addServiceAreas())
+//                        .build()
+//        );
+//
+//    }
 
 
 //    @GetMapping("/AllReservationByVehicleNo/{vehicleNumber}")

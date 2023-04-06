@@ -29,20 +29,20 @@ public class Vehicle {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_driver_id",nullable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Driver driver;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "vehicle")
-    @JsonIgnore
+//    @JsonIgnore
     private List<VehiclePictures> vehiclePictures = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "vehicle")
-    @JsonIgnore
+//    @JsonIgnore
     private List<Reservation> reservations = new ArrayList<>();
 
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
+//    @JsonIgnore
     @JoinTable(name = "service",joinColumns = @JoinColumn(name = "vehicle_id"),inverseJoinColumns = @JoinColumn(name = "service_area_id"))
     private List<ServiceArea> serviceAreas;
 
