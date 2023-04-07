@@ -18,14 +18,12 @@ public class Reservation{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private int reservationId;
-    private LocalDate dateTime;
-    private int days;
-    private double pickupLatitude;
-    private double pickupLongitude;
-    private double dropLatitude;
-    private double dropLongitude;
-    private Map stopPoints;
+    private LocalDate date;
     private int passengers;
+    private int days;
+    private String pickupLocation;
+    private String dropLocation;
+
 
     @OneToOne(mappedBy = "reservation",cascade = CascadeType.ALL)
     private Review review;

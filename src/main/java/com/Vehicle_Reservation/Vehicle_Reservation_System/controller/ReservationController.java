@@ -40,4 +40,9 @@ public class ReservationController{
     public ReservationDto getReservationByReservationId(@PathVariable Integer reservationId){
         return reservatinService.getReservationByReservationId(reservationId);
     }
+
+    @GetMapping("/get-reservation/{driverId}")
+    public List<Reservation> getReservationByDriverId(@PathVariable int driverId){
+        return reservatinService.getReservationByDriverId(driverId);
+    }
 }

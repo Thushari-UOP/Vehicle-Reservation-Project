@@ -11,12 +11,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReservationDto {
-    private LocalDate dateTime;
-    private int days;
-    private double pickupLatitude;
-    private double pickupLongitude;
-    private double dropLatitude;
-    private double dropLongitude;
+    private LocalDate date;
     private int passengers;
-    private Review review;
+    private int days;
+    private String pickupLocation;
+    private String dropLocation;
+    private int fkPassengerId;
+    private int fkVehicleId;
 }
