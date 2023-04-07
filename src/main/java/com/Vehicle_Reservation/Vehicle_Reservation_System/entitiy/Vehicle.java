@@ -29,7 +29,7 @@ public class Vehicle {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_driver_id",nullable = false)
-//    @JsonIgnore
+    @JsonIgnore
     private Driver driver;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "vehicle")

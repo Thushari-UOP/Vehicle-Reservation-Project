@@ -13,10 +13,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Reservation{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
+//    @JsonIgnore
     private int reservationId;
     private LocalDate date;
     private int passengers;
@@ -30,11 +31,11 @@ public class Reservation{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_vehicle_id")
-    @JsonIgnore
+//    @JsonIgnore
     private Vehicle vehicle;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_passenger_id")
-    @JsonIgnore
+//    @JsonIgnore
     private Passenger passenger;
 }

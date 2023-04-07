@@ -2,7 +2,9 @@ package com.Vehicle_Reservation.Vehicle_Reservation_System.service;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.ReservationDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Reservation;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.PassengerRepository;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.ReservationRepository;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.VehicleRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,23 @@ public class ReservatinService {
     @Autowired
     private ReservationRepository reservationRepository;
     @Autowired
+    private VehicleRepository vehicleRepository;
+    @Autowired
+    private PassengerRepository passengerRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     public void addReservation(ReservationDto reservationDto){
-        reservationRepository.save(modelMapper.map(reservationDto, Reservation.class));
+        reservationRepository.save(Reservation.builder()
+                .date(reservationDto.getDate())
+                .passengers(reservationDto.getPassengers())
+                .dropLocation(reservationDto.getDropLocation())
+                .pickupLocation(reservationDto.getPickupLocation())
+                .vehicle(vehicleRepository.findByVehicleId(reservationDto.getFkVehicleId()))
+                .days(reservationDto.getDays())
+                .passenger(passengerRepository.findByPassengerId(reservationDto.getFkPassengerId()))
+                .build());
     }
 
     public List<ReservationDto> getAllReservations(){

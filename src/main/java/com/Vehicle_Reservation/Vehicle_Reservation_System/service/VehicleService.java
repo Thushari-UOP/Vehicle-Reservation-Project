@@ -62,7 +62,7 @@ public class VehicleService {
         return vehicle;
     }
 
-    public List<Vehicle> search(String type, Integer passengers, LocalDate date, String town, String dates) {
+    public List<Vehicle> search(String type, Integer passengers, LocalDate date, Long town, String dates) {
         log.info(type, passengers, date, town);
         return vehicleRepository.search(type, passengers, town, dates);
     }

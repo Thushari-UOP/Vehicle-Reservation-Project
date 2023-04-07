@@ -71,7 +71,7 @@ public class VehicleController {
                                               @RequestParam Integer passengers,
                                               @RequestParam LocalDate date,
                                               @RequestParam String dates,
-                                              @RequestParam String town) {
+                                              @RequestParam Long town) {
         try{
             return ResponseEntity.ok(ApiResponse.builder()
                     .message("Fetch successfully")

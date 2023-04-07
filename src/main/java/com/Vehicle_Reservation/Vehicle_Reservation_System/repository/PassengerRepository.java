@@ -7,4 +7,6 @@ public interface PassengerRepository extends JpaRepository<Passenger,Integer> {
     Passenger getPassengerByUserNameIgnoreCase(String userName);
 
     Passenger getPassengerByEmail(String email);
+
+    Passenger findByPassengerId(int fkPassengerId);
 }

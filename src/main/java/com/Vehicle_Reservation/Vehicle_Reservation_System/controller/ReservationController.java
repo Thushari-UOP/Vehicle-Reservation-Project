@@ -41,8 +41,8 @@ public class ReservationController{
         return reservatinService.getReservationByReservationId(reservationId);
     }
 
-    @GetMapping("/get-reservation/{driverId}")
-    public List<Reservation> getReservationByDriverId(@PathVariable int driverId){
-        return reservatinService.getReservationByDriverId(driverId);
-    }
+//    @GetMapping("/get-reservation/{driverId}")
+//    public List<Reservation> getReservationByDriverId(@PathVariable int driverId){
+//        return reservatinService.getReservationByDriverId(driverId);
+//    }
 }
