@@ -2,23 +2,16 @@ package com.Vehicle_Reservation.Vehicle_Reservation_System.security;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Driver;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Passenger;
-import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Users;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.DriverRepository;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.PassengerRepository;
-import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private DriverRepository driverRepository;
@@ -31,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String str) throws UsernameNotFoundException {
         String type = str.split("//@@//")[1];
         String username = str.split("//@@//")[0];
-        Optional<Users> user = userRepository.findByEmail(username);
+//        Optional<Users> user = userRepository.findByEmail(username);
         String driver = "DRIVER";
         String passenger = "PASSENGER";
         if (driver.equalsIgnoreCase(type)) {
