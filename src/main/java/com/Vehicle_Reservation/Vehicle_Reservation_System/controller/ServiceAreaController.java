@@ -22,7 +22,7 @@ public class ServiceAreaController {
     }
 
     @GetMapping("/getAll")
-    public List<ServiceArea> getAllAreas(){
+    public List<ServiceAreaDto> getAllAreas(){
        return serviceAreaServices.getAllAreas();
     }
 

@@ -5,6 +5,7 @@ import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.ServiceArea;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.ServiceAreaRepository;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -29,7 +30,8 @@ public class ServiceAreaServices {
         return serviceArea.getVehicles();
     }
 
-    public List<ServiceArea> getAllAreas() {
-        return serviceAreaRepository.findAll();
+    public List<ServiceAreaDto> getAllAreas() {
+        List<ServiceArea> areaList = serviceAreaRepository.findAll();
+        return modelMapper.map(areaList, new TypeToken<List<ServiceAreaDto>>(){}.getType());
     }
 }
