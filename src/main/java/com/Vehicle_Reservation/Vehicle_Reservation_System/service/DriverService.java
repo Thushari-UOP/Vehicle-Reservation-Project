@@ -2,7 +2,6 @@ package com.Vehicle_Reservation.Vehicle_Reservation_System.service;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.DriverDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.UserAuthDto;
-import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.VehicleDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Driver;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.DriverRepository;
@@ -12,11 +11,8 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,7 +56,7 @@ public class DriverService {
 //        return modelMapper.map(driver,DriverDto.class);
 //    }
 
-    public void updateDriverDetails(String userName, String firstName, String lastName, String userName1, String password, String address, String telephone, String licenceNo, LocalDate dob, String email) {
+    public void updateDriverDetails(String userName, String firstName, String lastName, String userName1, String password, String address, String telephone, String licenceNo, String dob, String email) {
 
         Driver driver = driverRepository.getDriverByUserName(userName);
 
