@@ -12,8 +12,4 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
      @Query(value = "SELECT reservations FROM Vehicle WHERE vehicleNumber=?1")
      List<ReservationDto> getReservationsByVehicleNumber(String vehicleNumber);
 
-
-
-//    @Query(value = "SELECT sa.vehicles FROM ServiceArea sa sa.areaId=?1")
-//    List<Vehicle> getVehiclesByAreaId(int areaId);
 }

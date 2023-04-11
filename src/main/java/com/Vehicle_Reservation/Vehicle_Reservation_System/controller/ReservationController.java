@@ -1,9 +1,11 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.controller;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.ReservationDto;
-import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Reservation;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.resposes.ApiResponse;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.ReservatinService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,14 +18,23 @@ public class ReservationController{
     private ReservatinService reservatinService;
 
     @PostMapping("/add")
-    public void addReservation(@RequestBody ReservationDto reservationDto){
+    public boolean addReservation(@RequestBody ReservationDto reservationDto){
         reservatinService.addReservation(reservationDto);
+        return true;
     }
 
     @PostMapping("/create")
-    public boolean reservation(@RequestBody Reservation reservation){
-        reservatinService.reservationAdd(reservation);
-        return true;
+    public ResponseEntity<ApiResponse> createReservation(@RequestBody ReservationDto reservationDto){
+        try {
+            return ResponseEntity.ok(ApiResponse.builder()
+                    .message("Complete Reservation ")
+                    .success(true)
+                    .status(HttpStatus.OK)
+                    .response(reservatinService.addReservation(reservationDto))
+                    .build());
+        }catch (Exception e){
+            throw e;
+        }
     }
 
     @GetMapping("/getAll")
@@ -41,8 +52,4 @@ public class ReservationController{
         return reservatinService.getReservationByReservationId(reservationId);
     }
 
-//    @GetMapping("/get-reservation/{driverId}")
-//    public List<Reservation> getReservationByDriverId(@PathVariable int driverId){
-//        return reservatinService.getReservationByDriverId(driverId);
-//    }
 }

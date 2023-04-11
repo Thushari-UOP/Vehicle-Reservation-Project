@@ -16,18 +16,18 @@ public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int passengerId;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String name;
-    @Column(nullable = true,unique = true)
+    @Column(nullable = false)
     private String userName;
-    @Column(nullable = true,columnDefinition = "varchar(255)")
+    @Column(nullable = false)
     private String password;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String telephoneNo;
-    @Column(nullable = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "passenger")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "passenger",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Reservation> reservations = new ArrayList<>();
 }

@@ -17,13 +17,17 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vehicleId;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private VehicleType type;
     @Column(unique = true,nullable = false)
     private String vehicleNumber;
     @Column(unique = true,nullable = false)
     private String insuranceNo;
+    @Column(nullable = false)
     private int maxDays;
+    @Column(nullable = false)
     private int maxLength;
+    @Column(nullable = false)
     private int maxPassengers;
 
 
@@ -32,11 +36,11 @@ public class Vehicle {
     @JsonIgnore
     private Driver driver;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "vehicle")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "vehicle",cascade = CascadeType.ALL)
 //    @JsonIgnore
     private List<VehiclePictures> vehiclePictures = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "vehicle")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "vehicle",cascade = CascadeType.ALL)
 //    @JsonIgnore
     private List<Reservation> reservations = new ArrayList<>();
 

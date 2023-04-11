@@ -1,8 +1,10 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.service;
 
+import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.DriverDetailsDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.DriverDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.UserAuthDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Driver;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Reservation;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.DriverRepository;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.resposes.ApiResponse;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -51,11 +54,6 @@ public class DriverService {
         driverRepository.deleteById(driverId);
     }
 
-//    public DriverDto getDriverByDriverId(Integer driverId){
-//        Driver driver = driverRepository.getReferenceById(driverId);
-//        return modelMapper.map(driver,DriverDto.class);
-//    }
-
     public void updateDriverDetails(String userName, String firstName, String lastName, String userName1, String password, String address, String telephone, String licenceNo, String dob, String email) {
 
         Driver driver = driverRepository.getDriverByUserName(userName);
@@ -74,15 +72,10 @@ public class DriverService {
     public List<Vehicle> getVehiclesByUserName(String userName) {
         Driver driver = driverRepository.getDriverByEmail(userName);
         return driver.getVehicles();
-//        return modelMapper.map(driver.getVehicles(),new TypeToken<List<VehicleDto>>(){}.getType());
     }
 
     public Driver getDriverByUserName(String userName) {
         return driverRepository.getDriverByUserName(userName);
-    }
-
-    public Driver getDriverByEmail(String email) {
-        return driverRepository.getDriverByEmail(email);
     }
 
     public ApiResponse handleDriverLogin(UserAuthDto authDto) {
@@ -109,10 +102,18 @@ public class DriverService {
                 .build();
     }
 
+    public DriverDetailsDto getDriverByVehicleId(Integer vehicleId) {
+       Driver driver = driverRepository.getDriverByVehicleId(vehicleId);
+       return modelMapper.map(driver,DriverDetailsDto.class);
+    }
 
-//    public void addVehicleForDriver(String userName, Vehicle vehicle) {
-////        driverRepository.addVehicleForDriver(modelMapper.map(vehicleDto,Vehicle.class),userName);
-//        Driver driver = driverRepository.getDriverByUserName(userName);
-//        int driveId = driver.getDriverId();
-//    }
+
+    public List<Reservation> getAllReservationByDriverUserName(String userName) {
+        List<Vehicle> list = getVehiclesByUserName(userName);
+        List<Reservation> reservationList = list.stream()
+                .flatMap(vehicle -> vehicle.getReservations().stream())
+                .collect(Collectors.toList());
+        return reservationList;
+//        return modelMapper.map(reservationList,new TypeToken<List<ReservationDto>>(){}.getType());
+    }
 }

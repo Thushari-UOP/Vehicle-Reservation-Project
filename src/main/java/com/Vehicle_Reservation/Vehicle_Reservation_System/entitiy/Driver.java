@@ -16,26 +16,27 @@ public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int driverId;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String firstName;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String lastName;
-    @Column(unique = true,nullable = true)
+    @Column(nullable = false)
     private String userName;
-    @Column(nullable = true,columnDefinition = "varchar(255)")
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String address;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String telephone;
-    @Column(nullable = true)
+    @Column(nullable = false, unique = true)
     private String licenceNo;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String dob;
-    @Column(unique = true,nullable = true)
+    @Column(unique = true,nullable = false)
     private String email;
 
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "driver")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "driver", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Vehicle> vehicles = new ArrayList<>();
 }

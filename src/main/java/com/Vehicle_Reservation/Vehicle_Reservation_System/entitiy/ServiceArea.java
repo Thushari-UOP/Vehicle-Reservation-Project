@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 public class ServiceArea {
     @Id
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int serviceAreaId;
     @Column(unique = true, nullable = false)
     private String name;

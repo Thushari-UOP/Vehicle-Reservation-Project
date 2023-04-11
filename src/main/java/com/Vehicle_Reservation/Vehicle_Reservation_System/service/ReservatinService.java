@@ -24,7 +24,7 @@ public class ReservatinService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void addReservation(ReservationDto reservationDto){
+    public boolean addReservation(ReservationDto reservationDto){
         reservationRepository.save(Reservation.builder()
                 .date(reservationDto.getDate())
                 .passengers(reservationDto.getPassengers())
@@ -34,6 +34,7 @@ public class ReservatinService {
                 .days(reservationDto.getDays())
                 .passenger(passengerRepository.findByPassengerId(reservationDto.getFkPassengerId()))
                 .build());
+        return true;
     }
 
     public List<ReservationDto> getAllReservations(){
@@ -51,7 +52,4 @@ public class ReservatinService {
         return modelMapper.map(reservation,ReservationDto.class);
     }
 
-    public void reservationAdd(Reservation reservation) {
-        reservationRepository.save(reservation);
-    }
 }
