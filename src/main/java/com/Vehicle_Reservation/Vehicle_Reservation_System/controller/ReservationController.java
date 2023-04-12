@@ -1,6 +1,7 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.controller;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.ReservationDto;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Reservation;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.resposes.ApiResponse;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.service.ReservatinService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/reservation")
@@ -53,7 +55,7 @@ public class ReservationController{
     }
 
     @GetMapping("/get-all-for-passenger/{passengerId}")
-    public List<ReservationDto> getAllReservationsForDriver(@PathVariable int passengerId){
+    public List<Reservation> getAllReservationsForDriver(@PathVariable int passengerId){
         return reservatinService.getAllReservationsForPassenger(passengerId);
     }
 

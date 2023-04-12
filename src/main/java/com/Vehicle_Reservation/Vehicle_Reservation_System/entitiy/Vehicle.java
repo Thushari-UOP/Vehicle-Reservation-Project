@@ -1,6 +1,9 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
+@JsonIgnoreProperties({"reservations", "service"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "vehicleId")
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,21 +37,21 @@ public class Vehicle {
     private int maxPassengers;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_driver_id",nullable = false)
     @JsonIgnore
     private Driver driver;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "vehicle",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "vehicle",cascade = CascadeType.ALL)
 //    @JsonIgnore
     private List<VehiclePictures> vehiclePictures = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "vehicle",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "vehicle",cascade = CascadeType.ALL)
 //    @JsonIgnore
     private List<Reservation> reservations = new ArrayList<>();
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 //    @JsonIgnore
     @JoinTable(name = "service",joinColumns = @JoinColumn(name = "vehicle_id"),inverseJoinColumns = @JoinColumn(name = "service_area_id"))
     private List<ServiceArea> serviceAreas;
