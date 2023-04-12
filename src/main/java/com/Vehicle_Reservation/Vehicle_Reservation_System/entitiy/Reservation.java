@@ -1,7 +1,10 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +14,9 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
+@ToString
+@JsonIgnoreProperties({"vehicle", "passenger"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "reservationId")
 public class Reservation{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +36,12 @@ public class Reservation{
     @OneToOne(mappedBy = "reservation",cascade = CascadeType.ALL)
     private Review review;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_vehicle_id",nullable = false)
     @JsonIgnore
     private Vehicle vehicle;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_passenger_id",nullable = false)
     @JsonIgnore
     private Passenger passenger;
