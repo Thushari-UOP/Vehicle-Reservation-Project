@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/Reservation")
+@RequestMapping("/api/v1/reservation")
 public class ReservationController{
 
     @Autowired
@@ -47,9 +47,14 @@ public class ReservationController{
         return reservatinService.cancelReservation(reservationId);
     }
 
-    @GetMapping("/getReservationById/{reservationId}")
+    @GetMapping("/get-reservation-by-id/{reservationId}")
     public ReservationDto getReservationByReservationId(@PathVariable Integer reservationId){
         return reservatinService.getReservationByReservationId(reservationId);
+    }
+
+    @GetMapping("/get-all-for-passenger/{passengerId}")
+    public List<ReservationDto> getAllReservationsForDriver(@PathVariable int passengerId){
+        return reservatinService.getAllReservationsForPassenger(passengerId);
     }
 
 }

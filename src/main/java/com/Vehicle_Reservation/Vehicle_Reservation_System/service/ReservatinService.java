@@ -52,4 +52,8 @@ public class ReservatinService {
         return modelMapper.map(reservation,ReservationDto.class);
     }
 
+    public List<ReservationDto> getAllReservationsForPassenger(int passengerId) {
+        List<Reservation> list = reservationRepository.getReservationsByPassengerId(passengerId);
+        return modelMapper.map(list,new TypeToken<List<ReservationDto>>(){}.getType());
+    }
 }

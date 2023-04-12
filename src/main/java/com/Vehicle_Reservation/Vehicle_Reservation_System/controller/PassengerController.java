@@ -16,12 +16,6 @@ public class PassengerController {
     @Autowired
     private PassengerService passengerService;
 
-    @PostMapping("/add")
-    public boolean addPassenger(@RequestBody PassengerDto passengerDto){
-        passengerService.addPassenger(passengerDto);
-        return true;
-    }
-
     @GetMapping("/getAll")
     public List<PassengerDto> getAllPassengers(){
         return passengerService.getAllPassengers();

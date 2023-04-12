@@ -1,6 +1,5 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.ArrayList;
@@ -37,6 +36,6 @@ public class Driver {
 
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "driver", cascade = CascadeType.ALL)
-    @JsonIgnore
+//    @JsonIgnore
     private List<Vehicle> vehicles = new ArrayList<>();
 }

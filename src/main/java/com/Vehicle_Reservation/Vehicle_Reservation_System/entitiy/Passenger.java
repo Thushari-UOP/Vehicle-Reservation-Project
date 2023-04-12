@@ -1,6 +1,5 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +27,6 @@ public class Passenger {
     private String email;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "passenger",cascade = CascadeType.ALL)
-    @JsonIgnore
+//    @JsonIgnore
     private List<Reservation> reservations = new ArrayList<>();
 }
