@@ -3,6 +3,7 @@ package com.Vehicle_Reservation.Vehicle_Reservation_System.repository;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Vehicle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,4 +23,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle,Integer> {
     List<Vehicle> search(String type, Integer passengers, Long town, String dates);
 
     Vehicle findByVehicleId(int fkVehicleId);
+
+    @Transactional
+    void deleteByVehicleId(int vehicleId);
 }

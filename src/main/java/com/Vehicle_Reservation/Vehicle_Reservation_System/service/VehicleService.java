@@ -37,7 +37,8 @@ public class VehicleService {
     }
 
     public void deleteVehicleByVehicleId(int vehicleId) {
-        vehicleRepository.removeVehicleByVehicleId(vehicleId);
+        System.out.println(vehicleId);
+        vehicleRepository.deleteByVehicleId(vehicleId);
     }
 
     public void updateVehicleDetails(int vehicleId, String insuranceNo, int days, int maxLength, int maxPassengers) {

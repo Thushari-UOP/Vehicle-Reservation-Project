@@ -45,7 +45,7 @@ public class Vehicle {
     private List<Reservation> reservations = new ArrayList<>();
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 //    @JsonIgnore
     @JoinTable(name = "service",joinColumns = @JoinColumn(name = "vehicle_id"),inverseJoinColumns = @JoinColumn(name = "service_area_id"))
     private List<ServiceArea> serviceAreas;
