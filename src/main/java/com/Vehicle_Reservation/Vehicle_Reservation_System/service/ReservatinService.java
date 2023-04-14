@@ -1,6 +1,7 @@
 package com.Vehicle_Reservation.Vehicle_Reservation_System.service;
 
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.DriverDetailsDto;
+import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.PassengerDetailsDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.dto.ReservationDto;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.entitiy.Reservation;
 import com.Vehicle_Reservation.Vehicle_Reservation_System.repository.PassengerRepository;
@@ -53,27 +54,38 @@ public class ReservatinService {
         return true;
     }
 
-    public ReservationDto getReservationByReservationId(Integer reservationId) {
+    public Map<String, Object> getReservationByReservationId(Integer reservationId) {
         Reservation reservation = reservationRepository.getReservationsByReservationId(reservationId);
-        ReservationDto reservationDto = modelMapper.map(reservation, ReservationDto.class);
-        reservationDto.setVehicle(reservation.getVehicle());
-        reservationDto.setPassenger(reservation.getPassenger());
-        reservationDto.setDriver(reservation.getVehicle().getDriver());
+
+//        ReservationDto reservationDto = modelMapper.map(reservation, ReservationDto.class);
+//        reservationDto.setVehicle(reservation.getVehicle());
+//        reservationDto.setPassenger(reservation.getPassenger());
+//        reservationDto.setDriver(reservation.getVehicle().getDriver());
+        //        return reservationDto;
+
         Map<String, Object> map = new HashMap<>();
-        Map<String, Object> dMap = new HashMap<>();
-        Map<String, Object> pMap = new HashMap<>();
         DriverDetailsDto driverDetailsDto = modelMapper.map(reservation.getVehicle().getDriver(), DriverDetailsDto.class);
+        PassengerDetailsDto passengerDetailsDto = modelMapper.map(reservation.getPassenger(),PassengerDetailsDto.class);
+
+        map.put("driver", driverDetailsDto);
+        map.put("passenger", passengerDetailsDto);
+
+        return  map;
+
+//        Map<String, Object> dMap = new HashMap<>();
+//        Map<String, Object> pMap = new HashMap<>();
 //        dMap.put("firstName", reservation.getVehicle().getDriver().getFirstName());
 //        dMap.put("lastName", reservation.getVehicle().getDriver().getLastName());
 //        dMap.put("id", reservation.getVehicle().getDriver().getDriverId());
 //        map.put("days", reservation.getDays());
-//        map.put("driver", driverDetailsDto);
-//        return  map;
-        return reservationDto;
     }
 
     public List<Reservation> getAllReservationsForPassenger(int passengerId) {
-        List<Reservation> list = reservationRepository.getReservationsByPassengerId(passengerId);
-        return list;
+        return reservationRepository.getReservationsByPassengerId(passengerId);
     }
+
+    public List<Reservation> getAllReservationsForDriver(int driverId) {
+        return reservationRepository.getReservationsByDriverId(driverId);
+    }
+
 }

@@ -26,17 +26,13 @@ public class ReservationController{
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ApiResponse> createReservation(@RequestBody ReservationDto reservationDto){
-        try {
-            return ResponseEntity.ok(ApiResponse.builder()
-                    .message("Complete Reservation ")
-                    .success(true)
-                    .status(HttpStatus.OK)
-                    .response(reservatinService.addReservation(reservationDto))
-                    .build());
-        }catch (Exception e){
-            throw e;
-        }
+    public ResponseEntity<ApiResponse> createReservation(@RequestBody ReservationDto reservationDto) {
+        return ResponseEntity.ok(ApiResponse.builder()
+                .message("Complete Reservation ")
+                .success(true)
+                .status(HttpStatus.OK)
+                .response(reservatinService.addReservation(reservationDto))
+                .build());
     }
 
     @GetMapping("/getAll")
@@ -50,13 +46,18 @@ public class ReservationController{
     }
 
     @GetMapping("/get-reservation-by-id/{reservationId}")
-    public ReservationDto getReservationByReservationId(@PathVariable Integer reservationId){
+    public Map<String, Object> getReservationByReservationId(@PathVariable Integer reservationId){
         return reservatinService.getReservationByReservationId(reservationId);
     }
 
     @GetMapping("/get-all-for-passenger/{passengerId}")
-    public List<Reservation> getAllReservationsForDriver(@PathVariable int passengerId){
+    public List<Reservation> getAllReservationsForPassenger(@PathVariable int passengerId){
         return reservatinService.getAllReservationsForPassenger(passengerId);
+    }
+
+    @GetMapping("/get-all-for-driver/{driverId}")
+    public List<Reservation> getAllReservationsForDriver(@PathVariable int driverId){
+        return reservatinService.getAllReservationsForDriver(driverId);
     }
 
 }
